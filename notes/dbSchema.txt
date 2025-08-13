@@ -1,0 +1,53 @@
+USER
+- username - PK : string
+- email - unique : string
+- password : string
+- fullname ?: string
+- location ?: string
+- DOB ?: date
+- height ?: number
+- age ?: number
+- weight ?: number
+
+GOALS
+- username - PK,FK
+- steps ?: number 
+- running ?: number
+- sleep ?: number hrs
+- weight ?: number kg
+- water ?: number ltr
+
+DAILY ACTIVITY
+- id : string - PK
+- username - FK
+- date : date
+- steps : number
+- water : number
+- calories : number
+- heart rate : number
+
+ACTIVITY
+- username - FK
+- day: 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' |'Sat' | 'Sun'
+- percent : number
+
+TRAINER
+- id : string - PK
+- bgImg 
+- profileImg
+- trainerName : string
+- speciliziation : string
+- medal : number
+- star : number
+
+DIET
+- time : 'BREAKFAST' | 'LUNCH' | 'DINNER'
+- foodName : string
+- carbs : number(percent)
+- protien : number(percent)
+- fat : number(percent)
+
+SCHEDULED
+- taskName : string
+- category : 'Fitness' | 'Diet' | 'Style'
+
