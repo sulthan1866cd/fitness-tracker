@@ -15,13 +15,19 @@ const Input = ({ value, setValue, type, placeholder, required }: Props) => {
   return (
     <div className="input-container">
       <input
+        id={placeholder}
         className="input"
         type={type}
         value={value}
         onChange={(event) => handleInputChange(event.target.value)}
         required={required}
       />
-      <label className={value===''?'placeholder':'small-label'}>{placeholder}</label>
+      <label
+        htmlFor={placeholder}
+        className={value === "" ? "placeholder" : "small-label"}
+      >
+        {placeholder}
+      </label>
     </div>
   );
 };

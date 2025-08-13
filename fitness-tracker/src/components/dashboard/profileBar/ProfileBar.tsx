@@ -6,6 +6,7 @@ import Pill from "./Pill";
 import FormModal from "../formModal/FormModal";
 import type { IGoal } from "../../../interfaces/goal.interface";
 import { useState } from "react";
+import type { ISchedule } from "../../../interfaces/schedule.interface";
 
 interface Props {
   percent: number;
@@ -13,8 +14,16 @@ interface Props {
   setGoal: React.Dispatch<React.SetStateAction<IGoal>>;
   user: IUser;
   setUser: React.Dispatch<React.SetStateAction<IUser>>;
+  schedules: ISchedule[];
 }
-const ProfileBar = ({ percent, user, setUser, goal, setGoal }: Props) => {
+const ProfileBar = ({
+  percent,
+  user,
+  setUser,
+  goal,
+  setGoal,
+  schedules,
+}: Props) => {
   const navigate = useNavigate();
   const [isformModelOpen, setFormModalOpen] = useState<boolean>(false);
 
@@ -92,12 +101,18 @@ const ProfileBar = ({ percent, user, setUser, goal, setGoal }: Props) => {
         </div>
       </ProfileCard>
       <h2>Scheduled</h2>
-      <ProfileCard justtfyContent="left">
-        <img src="/yoga.png" alt="" />
-      </ProfileCard>
-      <ProfileCard justtfyContent="left">
-        <img src="/yoga.png" alt="" />
-      </ProfileCard>
+      {schedules.map((schedule) => (
+        <ProfileCard justtfyContent="around" key={schedule.id}>
+          <img src="/yoga.png" alt="schedule" />
+          <div>
+            <h3>{schedule.taskName}</h3>
+            <span>{schedule.category}</span>
+          </div>
+          <div>
+            {new Date(schedule.date).toDateString().substring(4,10)}
+          </div>
+        </ProfileCard>
+      ))}
     </div>
   );
 };

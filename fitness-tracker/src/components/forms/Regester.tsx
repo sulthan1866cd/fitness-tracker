@@ -40,7 +40,7 @@ const Regester = () => {
     );
     const result = await response;
     if (result.status === 409) {
-      setError("user name or password already exists");
+      setError("user name or email already exists");
       return;
     }
     if (result.status === 201) {

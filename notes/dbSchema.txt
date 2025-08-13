@@ -50,4 +50,5 @@ DIET
 SCHEDULED
 - taskName : string
 - category : 'Fitness' | 'Diet' | 'Style'
+- date : Date
 

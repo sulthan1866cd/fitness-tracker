@@ -6,6 +6,8 @@ import ProfileBar from "./profileBar/ProfileBar";
 import Sidebar from "./sidebar/Sidebar";
 import "./Dashboard.css";
 import ActivityCard from "./activityCard/ActivityCard";
+import { type ISchedule } from "../../interfaces/schedule.interface";
+import { fetchData } from "../../utils";
 
 const Dashboard = () => {
   const [userDetails, setUserDetails] = useState<IUser>({
@@ -19,6 +21,7 @@ const Dashboard = () => {
     id: 0,
     userUsername: username || "Username",
   });
+  const [schedules, setSchedules] = useState<ISchedule[]>([]);
   const countDefined = (data: IGoal | IUser) => {
     let notNull = 0;
     for (const key in data) {
@@ -31,36 +34,20 @@ const Dashboard = () => {
   };
   const time = Number(new Date().toTimeString().substring(0, 2));
   const greeting =
-    time < 12 ? "Morning" : time > 12 && time < 16 ? "Afternoon" : "Night";
+    time < 12 ? "Morning" : time >= 12 && time < 16 ? "Afternoon" : "Night";
 
   const navigete = useNavigate();
   useEffect(() => {
     if (username !== localStorage.getItem("username")) {
       navigete("/login");
     }
-  });
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_BASE_URL_V1}/users/${username}`
-      );
-
-      const result = await response.json();
-      setUserDetails(result);
-    };
-    fetchData();
   }, []);
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_BASE_URL_V1}/goals/${username}`
-      );
-
-      const result = await response.json();
-      setGoal(result);
-    };
-    fetchData();
+    fetchData(username, "users", setUserDetails);
+    fetchData(username, "goals", setGoal);
+    fetchData(username, "schedules", setSchedules);
   }, []);
+
   useEffect(() => {
     const progress = countDefined(userDetails) + countDefined(goal) - 5; //pre defined profile fields;
     const percent = Math.floor((progress / 11) * 100);
@@ -102,6 +89,7 @@ const Dashboard = () => {
         goal={goal}
         setGoal={setGoal}
         percent={profilePresent}
+        schedules={schedules}
       />
     </div>
   );
