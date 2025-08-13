@@ -1,7 +1,6 @@
-import { useState } from "react";
 import "./Sidebar.css";
 import {
-  AccountBalance,
+  AccountBalanceWallet,
   DirectionsRun,
   Explore,
   ForumRounded,
@@ -90,7 +89,7 @@ const Sidebar = ({selected,setSelected}:Props) => {
         />
       </div>
       <div onClick={() => setSelected("AccountBalance")}>
-        <AccountBalance
+        <AccountBalanceWallet
           fontSize="large"
           className={
             selected === "AccountBalance"
