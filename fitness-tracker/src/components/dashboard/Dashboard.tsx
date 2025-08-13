@@ -10,6 +10,16 @@ import { type ISchedule } from "../../interfaces/schedule.interface";
 import { fetchData } from "../../utils";
 
 const Dashboard = () => {
+  const [selected, setSelected] = useState<
+    | "Home"
+    | "ShowChart"
+    | "DirectionsRun"
+    | "ForumRounded"
+    | "Explore"
+    | "Settings"
+    | "AccountBalance"
+  >("Home");
+
   const [userDetails, setUserDetails] = useState<IUser>({
     username: "Username",
     password: "",
@@ -55,33 +65,39 @@ const Dashboard = () => {
   }, [goal, userDetails]);
   return (
     <div className="display-flex">
-      <Sidebar />
-      <div className="dashboard-container">
-        <h3>{`Good ${greeting}`}</h3>
-        <h1>{"Welcome Back 🎉"}</h1>
-        <div className="display-flex">
-          <ActivityCard size={25} color="green">
-            <p>0/{goal.steps}steps </p>
-          </ActivityCard>
-          <ActivityCard size={25} color="blue">
-            <p>0/{goal.water} ltr</p>
-          </ActivityCard>
-          <ActivityCard size={25} color="yellow">
-            calories
-          </ActivityCard>
-          <ActivityCard size={25} color="red">
-            110bpm
-          </ActivityCard>
+      <Sidebar selected={selected} setSelected={setSelected} />
+      {selected === "Home" ? (
+        <div className="dashboard-container">
+          <h3>{`Good ${greeting}`}</h3>
+          <h1>{"Welcome Back 🎉"}</h1>
+          <div className="display-flex">
+            <ActivityCard size={25} color="green">
+              <p>0/{goal.steps}steps </p>
+            </ActivityCard>
+            <ActivityCard size={25} color="blue">
+              <p>0/{goal.water} ltr</p>
+            </ActivityCard>
+            <ActivityCard size={25} color="yellow">
+              calories
+            </ActivityCard>
+            <ActivityCard size={25} color="red">
+              110bpm
+            </ActivityCard>
+          </div>
+          <div className="display-flex">
+            <ActivityCard size={50} color="transperentGreen">
+              hwllo
+            </ActivityCard>
+            <ActivityCard size={50} color="transperentGreen">
+              hwllo
+            </ActivityCard>
+          </div>
         </div>
-        <div className="display-flex">
-          <ActivityCard size={50} color="transperentGreen">
-            hwllo
-          </ActivityCard>
-          <ActivityCard size={50} color="transperentGreen">
-            hwllo
-          </ActivityCard>
+      ) : (
+        <div className="dashboard-container">
+          <h1>{selected} page build in progress</h1>
         </div>
-      </div>
+      )}
 
       <ProfileBar
         user={userDetails}
