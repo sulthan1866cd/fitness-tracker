@@ -1,0 +1,16 @@
+body {
+  padding: 0px;
+  margin: 0px;
+}
+.display-inline {
+  display: inline;
+}
+.display-flex {
+  display: flex;
+}
+.color-red {
+  color: red;
+}
+.color-green{
+  color: green;
+}
