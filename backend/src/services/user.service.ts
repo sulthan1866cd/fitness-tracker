@@ -1,5 +1,4 @@
-
-import  User  from "../models/User.model";
+import User from "../models/User.model";
 import userRepository from "../repositories/user.repository";
 
 export const createUser = (newUser: User) => {
@@ -18,10 +17,11 @@ export const getUserByEmail = (email: string) => {
 export const getUserByUsernameOrEmail = (username: string, email: string) => {
   return userRepository
     .createQueryBuilder()
-    .where({username})
-    .orWhere({email})
+    .where({ username })
+    .orWhere({ email })
     .getOne();
 };
 export const updateUser = async (user: User) => {
-  return userRepository.save(user);
+  if (await getUserByUsername(user.username)) return userRepository.save(user);
+  return false;
 };

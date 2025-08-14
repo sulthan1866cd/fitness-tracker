@@ -1,8 +1,9 @@
 .activity-card {
   margin: 5px;
-  padding: 5px;
+  padding: 15px;
   border-radius: 8px;
   color: white;
+  position: relative;
 }
 .activity-card-green {
   background-color: rgb(74, 190, 29);
@@ -25,5 +26,5 @@
 }
 .activity-card-50 {
   width: 50%;
-  height: 300px;
+  height: 400px;
 }

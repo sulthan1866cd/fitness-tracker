@@ -16,8 +16,7 @@ app.use(json());
 app.use("/api/v1", appV1);
 try {
   dataSource.initialize();
-  console.log("Data Source has been initialized!");
 } catch (error) {
-  console.error("Error during Data Source initialization", error);
+  console.error("Error", error);
 }
 app.listen(process.env.PORT);

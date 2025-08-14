@@ -14,3 +14,7 @@ export const validateNumbers = (
   setError(`${field} value should be between ${min} and ${max}`);
   return false;
 };
+
+export const setDecimal = (value: number) => {
+  return Math.floor(value * 100) / 100;
+};

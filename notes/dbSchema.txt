@@ -17,19 +17,18 @@ GOALS
 - weight ?: number kg
 - water ?: number ltr
 
-DAILY ACTIVITY
+DAILY PROGRESS
 - id : string - PK
 - username - FK
-- date : date
 - steps : number
 - water : number
 - calories : number
 - heart rate : number
-
-ACTIVITY
-- username - FK
-- day: 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' |'Sat' | 'Sun'
 - percent : number
+- cardio: number;
+- stretching: number;
+- treadmill: number;
+- strength: number;
 
 TRAINER
 - id : string - PK
@@ -43,6 +42,7 @@ TRAINER
 DIET
 - time : 'BREAKFAST' | 'LUNCH' | 'DINNER'
 - foodName : string
+- foodImg
 - carbs : number(percent)
 - protien : number(percent)
 - fat : number(percent)

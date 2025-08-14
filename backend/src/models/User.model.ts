@@ -1,5 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
-import Goal from "./Goal.model";
+import { Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity({ name: "users" })
 class User {

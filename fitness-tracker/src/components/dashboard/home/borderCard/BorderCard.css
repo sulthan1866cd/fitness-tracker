@@ -1,0 +1,15 @@
+.border-card {
+  height: 200px;
+  border: 1px solid gray;
+  margin: 5px;
+  padding: 15px;
+  border-radius: 8px;
+  color: white;
+  position: relative;
+}
+.border-card-25 {
+  width: 25%;
+}
+.border-card-50 {
+  width: 50%;
+}

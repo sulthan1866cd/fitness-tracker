@@ -2,8 +2,8 @@ import React from "react";
 import "./Util.css";
 
 interface Props {
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  value: any;
+  setValue: React.Dispatch<React.SetStateAction<any>>;
   type: string;
   placeholder: string;
   required?: boolean;

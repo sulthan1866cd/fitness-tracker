@@ -1,0 +1,69 @@
+.activity-card-slider {
+  border-radius: 50px;
+  height: 10px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.4);
+}
+.activity-card-slider > div {
+  border-radius: 50px;
+  height: 10px;
+  width: 50%;
+  background-color: white;
+}
+.calories-icon,
+.heart-rate-icon {
+  font-size: 80px !important;
+  margin-bottom: -15px;
+  margin-left: 50px;
+}
+
+.activity-card-doughnut {
+  position: absolute;
+  top: 50px;
+  z-index: 2;
+}
+.doughnut-selected-value {
+  position: absolute;
+  top: 150px;
+  left: 120px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 80px 60px;
+}
+.doughnut-selected-value > h2 {
+  margin: 0px;
+}
+.doughnut-values {
+  position: absolute;
+  right: 20px;
+}
+.doughnut-values > p {
+  margin: 40px 0px;
+}
+.doughnut-values span {
+  margin: 0px 20px;
+}
+
+.trainer-bg-img {
+  width: 99%;
+  height: 100px;
+  border-radius: 15px;
+}
+.trainer-profile-img {
+  position: absolute;
+  top: 80px;
+  left: 30px;
+}
+.trainer-stats {
+  display: flex;
+  justify-content: space-between;
+}
+.diet-header {
+  margin: 0px;
+  background-color: rgba(217, 255, 82, 0.5);
+  color: rgb(120, 170, 3);
+  padding: 10px 30px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}

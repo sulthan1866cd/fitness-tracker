@@ -1,11 +1,13 @@
 import { Router } from "express";
 import userRouter from "./user.route";
-import goalRouter from "./goal.route"
-import scheduleRouter from "./schedule.route"
+import goalRouter from "./goal.route";
+import scheduleRouter from "./schedule.route";
+import dailyProgressRouter from "./dailyProgress.routes";
 import errorHandler from "../../middleware/errorHandler";
 const app = Router();
 app.use("/users", userRouter);
-app.use("/goals",goalRouter);
-app.use("/schedules",scheduleRouter)
-app.use(errorHandler)
+app.use("/goals", goalRouter);
+app.use("/schedules", scheduleRouter);
+app.use("/daily-progress", dailyProgressRouter);
+app.use(errorHandler);
 export default app;

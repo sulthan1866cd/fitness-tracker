@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Input from "../../utilComponents/Input";
-import type { IGoal } from "../../../interfaces/goal.interface";
-import Button from "../../utilComponents/Button";
-import { validateNumbers } from "./helper";
+import React, { useState } from "react";
+import Input from "../../../utilComponents/Input";
+import type { IGoal } from "../../../../interfaces/goal.interface";
+import Button from "../../../utilComponents/Button";
+import { setDecimal, validateNumbers } from "./helper";
 
 interface Props {
   goal: IGoal;
@@ -13,28 +13,20 @@ interface Props {
 }
 
 const GoalForm = ({ goal, setGoal, setOpen, setError, setMessage }: Props) => {
-  const [running, setRunning] = useState<string>("");
-  const [sleep, setSleep] = useState<string>("");
-  const [steps, setSteps] = useState<string>("");
-  const [water, setWater] = useState<string>("");
-  const [weight, setWeight] = useState<string>("");
-
-  useEffect(() => {
-    setRunning(String(goal.running || ""));
-    setSleep(String(goal.sleep || ""));
-    setSteps(String(goal.steps || ""));
-    setWater(String(goal.water || ""));
-    setWeight(String(goal.weight || ""));
-  }, [goal]);
+  const [running, setRunning] = useState<number>(goal.running || 0);
+  const [sleep, setSleep] = useState<number>(goal.sleep || 0);
+  const [steps, setSteps] = useState<number>(goal.steps || 0);
+  const [water, setWater] = useState<number>(goal.water || 0);
+  const [weight, setWeight] = useState<number>(goal.weight || 0);
 
   const handleSave = async () => {
     if (
       !(
-        validateNumbers(setError, "running", Number(running), 2, 10000) &&
-        validateNumbers(setError, "sleep", Number(sleep), 5, 10) &&
-        validateNumbers(setError, "steps", Number(steps), 500, 10000) &&
-        validateNumbers(setError, "water", Number(water), 2, 10) &&
-        validateNumbers(setError, "weight", Number(weight), 40, 90)
+        validateNumbers(setError, "running", running, 2, 10000) &&
+        validateNumbers(setError, "sleep", sleep, 5, 10) &&
+        validateNumbers(setError, "steps", steps, 500, 10000) &&
+        validateNumbers(setError, "water", water, 2, 10) &&
+        validateNumbers(setError, "weight", weight, 40, 90)
       )
     )
       return;
@@ -48,11 +40,11 @@ const GoalForm = ({ goal, setGoal, setOpen, setError, setMessage }: Props) => {
         body: JSON.stringify({
           id: goal.id,
           userUsername: goal.userUsername,
-          running: Number(running),
-          sleep: Number(sleep),
-          steps: Number(steps),
-          water: Number(water),
-          weight: Number(weight),
+          running: setDecimal(running),
+          sleep: setDecimal(sleep),
+          steps: Math.floor(steps),
+          water: setDecimal(water),
+          weight: setDecimal(weight),
         }),
       }
     );
