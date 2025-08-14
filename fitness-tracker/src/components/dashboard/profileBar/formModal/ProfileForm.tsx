@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Input from "../../utilComponents/Input";
-import Button from "../../utilComponents/Button";
-import type { IUser } from "../../../interfaces/user.interface";
-import { validateNumbers } from "./helper";
+import React, {  useState } from "react";
+import Input from "../../../utilComponents/Input";
+import Button from "../../../utilComponents/Button";
+import type { IUser } from "../../../../interfaces/user.interface";
+import { setDecimal, validateNumbers } from "./helper";
 interface Props {
   user: IUser;
   setUser: React.Dispatch<React.SetStateAction<IUser>>;
@@ -17,27 +17,31 @@ const ProfileForm = ({
   setError,
   setMessage,
 }: Props) => {
-  const [name, setName] = useState<string>("");
-  const [location, setLocation] = useState<string>("");
-  const [dateOfBirth, setDateOfBirth] = useState<string>("");
-  const [height, setHeight] = useState<string>("");
-  const [weight, setWeight] = useState<string>("");
-
-  useEffect(() => {
-    setName(user.fullName || "");
-    setLocation(user.location || "");
-    setDateOfBirth(String(user.dateOfBirth || "").substring(0, 10));
-    setHeight(String(user.height || ""));
-    setWeight(String(user.weight || ""));
-  }, [user]);
+  const [name, setName] = useState<string>(user.fullName || "");
+  const [location, setLocation] = useState<string>(user.location || "");
+  const [dateOfBirth, setDateOfBirth] = useState<Date>(user.dateOfBirth||new Date());
+  const [height, setHeight] = useState<number>(user.height ||0);
+  const [weight, setWeight] = useState<number>(user.weight || 0);
 
   const handleSave = async () => {
     let age = new Date().getFullYear() - new Date(dateOfBirth).getFullYear();
 
     if (
       !(
-        validateNumbers(setError, "height", Number(height), 50, 250) &&
-        validateNumbers(setError, "weight", Number(weight), 30, 250) &&
+        validateNumbers(
+          setError,
+          "height",
+          height,
+          50,
+          250,
+        ) &&
+        validateNumbers(
+          setError,
+          "weight",
+          weight,
+          30,
+          250,
+        ) &&
         validateNumbers(setError, "age", age, 10, 120)
       )
     )
@@ -55,9 +59,9 @@ const ProfileForm = ({
           email: user.email,
           fullName: name,
           location: location,
-          dateOfBirth: new Date(dateOfBirth),
-          height: Number(height),
-          weight: Number(weight),
+          dateOfBirth: dateOfBirth,
+          height: setDecimal(height),
+          weight: setDecimal(weight),
           age,
         }),
       }

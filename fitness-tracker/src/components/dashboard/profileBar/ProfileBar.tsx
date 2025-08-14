@@ -3,10 +3,11 @@ import type { IUser } from "../../../interfaces/user.interface";
 import "./ProfileBar.css";
 import ProfileCard from "./ProfileCard";
 import Pill from "./Pill";
-import FormModal from "../formModal/FormModal";
+import FormModal from "./formModal/FormModal";
 import type { IGoal } from "../../../interfaces/goal.interface";
 import { useState } from "react";
 import type { ISchedule } from "../../../interfaces/schedule.interface";
+import { AccountCircle } from "@mui/icons-material";
 
 interface Props {
   percent: number;
@@ -29,12 +30,12 @@ const ProfileBar = ({
 
   const handleLogout = () => {
     localStorage.removeItem("username");
-    navigate("/login");
+    navigate("/");
   };
   return (
     <div className="profile-bar-container">
       <ProfileCard justtfyContent="around">
-        <img src="/cd.png" alt="user" />
+        <AccountCircle fontSize="large" />
         <div>
           <h3>{user.fullName || "Username"}</h3>
           <h5>{user.location || "Location"}</h5>
@@ -57,21 +58,24 @@ const ProfileBar = ({
       <ProfileCard justtfyContent="around">
         <span>
           <div>
-            <h1 className="display-inline">{user.weight || 0}</h1>kg
+            <h1 className="display-inline">{user.weight || 0}</h1>
+            <span className="color-grey">kg</span>
           </div>
-          Weight
+          <span className="color-grey">Weight</span>
         </span>
         <span>
           <div>
-            <h1 className="display-inline">{user.height || 0}</h1>cm
+            <h1 className="display-inline">{user.height || 0}</h1>
+            <span className="color-grey">cm</span>
           </div>
-          Height
+          <span className="color-grey">Height</span>
         </span>
         <span>
           <div>
-            <h1 className="display-inline">{user.age || 0}</h1>yrs
+            <h1 className="display-inline">{user.age || 0}</h1>
+            <span className="color-grey">yrs</span>
           </div>
-          Age
+          <span className="color-grey">Age</span>
         </span>
       </ProfileCard>
       <h2>Your Goals</h2>
@@ -79,14 +83,14 @@ const ProfileBar = ({
         <img src="/running.png" alt="" />
         <div>
           <h3>Runnung</h3>
-          <span>{goal.running || 0}km</span>
+          <span className="color-grey">{goal.running || 0}km</span>
         </div>
       </ProfileCard>
       <ProfileCard justtfyContent="left">
         <img src="/sleeping.png" alt="" />
         <div>
           <h3>sleeping</h3>
-          <span>{goal.sleep || 0}hrs</span>
+          <span className="color-grey">{goal.sleep || 0}hrs</span>
         </div>
       </ProfileCard>
       <ProfileCard justtfyContent="left">
@@ -97,7 +101,7 @@ const ProfileBar = ({
               (goal.weight || 0) > (user.weight || 0) ? "Gain" : "Loss"
             } Target`}
           </h3>
-          <span>{goal.weight || 0}kg</span>
+          <span className="color-grey">{goal.weight || 0}kg</span>
         </div>
       </ProfileCard>
       <h2>Scheduled</h2>
@@ -106,10 +110,10 @@ const ProfileBar = ({
           <img src="/yoga.png" alt="schedule" />
           <div>
             <h3>{schedule.taskName}</h3>
-            <span>{schedule.category}</span>
+            <span className="color-grey">{schedule.category}</span>
           </div>
-          <div>
-            {new Date(schedule.date).toDateString().substring(4,10)}
+          <div className="color-grey">
+            {new Date(schedule.date).toDateString().substring(4, 10)}
           </div>
         </ProfileCard>
       ))}

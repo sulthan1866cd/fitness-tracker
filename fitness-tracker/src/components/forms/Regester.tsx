@@ -4,6 +4,12 @@ import "./Form.css";
 import Button from "../utilComponents/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { verifyEmptyField } from "./helper";
+import {
+  getDummyDailyProgress,
+  getDummySchedules,
+} from "../../utils/dummyDatas";
+import type { ISchedule } from "../../interfaces/schedule.interface";
+import type { IDailyProgress } from "../../interfaces/dailyProgress.interface";
 
 const Regester = () => {
   const [error, setError] = useState<string>("");
@@ -14,17 +20,40 @@ const Regester = () => {
 
   const navigation = useNavigate();
 
+  const validateEmail = (email: string) => {
+    const regex: RegExp = /[a-zA-z1-9]+\@[a-zA-z1-9]+\.[a-zA-z1-9]+/;
+    if (!regex.test(email)) {
+      setError("Invalid Email format");
+    }
+    setError("");
+    return true;
+  };
+
+  const validatePassword = (password: string, confirmPassword: string) => {
+    if (password.length < 8) {
+      setError("Password should be at least 8 characters");
+      return false;
+    }
+    if (password !== confirmPassword) {
+      setError("Password and confirm password dosent match");
+      return false;
+    }
+    setError("");
+    return true;
+  };
   const handleSubmit = async () => {
     if (
       !(
         verifyEmptyField(username, setError, "please enter username") &&
         verifyEmptyField(email, setError, "please enter email") &&
+        validateEmail(email) &&
         verifyEmptyField(password, setError, "please enter password") &&
         verifyEmptyField(
           confirmPassword,
-          setEmail,
+          setError,
           "please enter confirm password"
-        )
+        ) &&
+        validatePassword(password, confirmPassword)
       )
     )
       return;
@@ -44,6 +73,37 @@ const Regester = () => {
       return;
     }
     if (result.status === 201) {
+      //================ posting dummy datas ====================
+      const schedules: ISchedule[] = getDummySchedules(username);
+      for (let index = 0; index < schedules.length; index++) {
+        await fetch(
+          `${import.meta.env.VITE_BACKEND_BASE_URL_V1}/schedules/${username}`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(schedules[index]),
+          }
+        );
+      }
+
+      const dailyProgress: IDailyProgress[] = getDummyDailyProgress(username);
+      for (let index = 0; index < dailyProgress.length; index++) {
+        await fetch(
+          `${
+            import.meta.env.VITE_BACKEND_BASE_URL_V1
+          }/daily-progress/${username}`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(dailyProgress[index]),
+          }
+        );
+      }
+
       localStorage.setItem("username", username);
       navigation(`/user/${username}`);
     }
@@ -88,7 +148,7 @@ const Regester = () => {
         </Button>
         <p>
           Yes i have an account?
-          <Link to={"/login"} className="link">
+          <Link to={"/"} className="link">
             Login
           </Link>
         </p>

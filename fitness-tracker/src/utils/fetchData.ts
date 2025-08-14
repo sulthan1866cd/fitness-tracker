@@ -1,7 +1,7 @@
 import type React from "react";
 
 export const fetchData = async (
-  username: string|undefined,
+  username: string | undefined,
   dataPath: string,
   dataSetter: React.Dispatch<React.SetStateAction<any>>
 ) => {
@@ -11,4 +11,5 @@ export const fetchData = async (
 
   const result = await response.json();
   dataSetter(result);
+  return response.status===200
 };

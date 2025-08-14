@@ -1,11 +1,11 @@
 import type React from "react";
-import Button from "../../utilComponents/Button";
-import type { IGoal } from "../../../interfaces/goal.interface";
+import Button from "../../../utilComponents/Button";
+import type { IGoal } from "../../../../interfaces/goal.interface";
 import { useState } from "react";
 import "./FormModal.css";
 import GoalForm from "./GoalForm";
 import ProfileForm from "./ProfileForm";
-import type { IUser } from "../../../interfaces/user.interface";
+import type { IUser } from "../../../../interfaces/user.interface";
 
 interface Props {
   isOpen: boolean;

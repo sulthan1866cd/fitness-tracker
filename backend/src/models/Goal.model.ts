@@ -3,7 +3,6 @@ import {
   Entity,
   JoinColumn,
   OneToOne,
-  PrimaryColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import User from "./User.model";
@@ -14,13 +13,13 @@ export class Goal {
   id: number;
   @Column({ nullable: true })
   steps?: number;
-  @Column({ nullable: true })
+  @Column({type:"double precision", nullable: true })
   running?: number;
-  @Column({ nullable: true })
+  @Column({type:"double precision", nullable: true })
   sleep?: number;
-  @Column({ nullable: true })
+  @Column({ type:"double precision",nullable: true })
   weight?: number;
-  @Column({ nullable: true })
+  @Column({ type:"double precision",nullable: true })
   water?: number;
 
   @OneToOne(() => User, (user) => user.username)

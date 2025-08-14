@@ -1,7 +1,7 @@
 export interface ISchedule {
-  id: number;
+  id?: number;
   taskName: string;
-  category: "Fitness" | "Diet" | "Style";
+  category: "Fitness" | "Diet";
   date: Date;
   userUsername: string;
 }

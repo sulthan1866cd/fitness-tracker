@@ -50,14 +50,10 @@ router.get("/:username", async (req: Request, res: Response) => {
 router.put(
   "/:username",
   async (req: Request, res: Response, next: NextFunction) => {
-    const username: string = req.params.username;
     const userdetails: User = req.body;
-    const existing: User = (await getUserByEmail(userdetails.email)) as User;
-    if (existing && existing.username !== username) {
-      res.status(409).json({ message: "email already exists" });
-      return;
-    }
-    const updatedUser: User = (await updateUser(userdetails)) as User;
+    const updatedUser: User | false = await updateUser(userdetails);
+    if (!updatedUser)
+      return res.status(404).json({ message: "user not found" });
     res.json(updatedUser);
   }
 );
