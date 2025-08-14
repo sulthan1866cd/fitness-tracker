@@ -30,23 +30,6 @@ DAILY PROGRESS
 - treadmill: number;
 - strength: number;
 
-TRAINER
-- id : string - PK
-- bgImg 
-- profileImg
-- trainerName : string
-- speciliziation : string
-- medal : number
-- star : number
-
-DIET
-- time : 'BREAKFAST' | 'LUNCH' | 'DINNER'
-- foodName : string
-- foodImg
-- carbs : number(percent)
-- protien : number(percent)
-- fat : number(percent)
-
 SCHEDULED
 - taskName : string
 - category : 'Fitness' | 'Diet' | 'Style'

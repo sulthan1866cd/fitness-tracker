@@ -50,7 +50,12 @@ const WeeklyProgress = ({ dailyProgresses, setDailyProgressIndex }: Props) => {
   return (
     <div className="display-flex">
       <ActivityCard size={50} color="transperentGreen">
-        <h1 className="color-black">Activity</h1>
+        <div className="weekly-activity-header">
+          <h1 className="color-black">Activity</h1>
+          <select>
+            <option>Weekly</option>
+          </select>
+        </div>
         <Bar
           data={barCardData}
           options={{
@@ -67,8 +72,12 @@ const WeeklyProgress = ({ dailyProgresses, setDailyProgressIndex }: Props) => {
         />
       </ActivityCard>
       <ActivityCard size={50} color="transperentGreen">
-        <h1 className="color-black">Progress</h1>
-
+        <div className="weekly-activity-header">
+          <h1 className="color-black">Progress</h1>
+          <select>
+            <option>Weekly</option>
+          </select>
+        </div>
         <Doughnut
           className="activity-card-doughnut"
           data={doughnutCardData}
@@ -80,7 +89,10 @@ const WeeklyProgress = ({ dailyProgresses, setDailyProgressIndex }: Props) => {
             },
           }}
         />
-        <div className="doughnut-selected-value color-black"><h2>{selectedProgress} </h2>{`${doughnutValues[selectedProgress]} hrs`}</div>
+        <div className="doughnut-selected-value color-black">
+          <h2>{selectedProgress} </h2>
+          {`${doughnutValues[selectedProgress]} hrs`}
+        </div>
 
         <div className="doughnut-values">
           {Object.values(doughnutValues).map((value, index) => (
