@@ -82,3 +82,5 @@ create a .env.local in fitness-tracker folder and add the following parameters
 - VITE_BACKEND_BASE_URL_V1='http://localhost:3000/api/v1'(if PORT of backend is 3000)
 
 
+![alt text](image.png)
+![alt text](image-1.png)
