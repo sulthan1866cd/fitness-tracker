@@ -52,7 +52,7 @@ const TrainersPlan = () => {
               />
               <div>
                 <h3 className="color-black">{foodname}</h3>
-                <div>
+                <div className="diet-macros">
                   <span className="color-grey">
                     {dummyDietPlans[dietPlanIndex].carbs[index]} % carbs
                   </span>

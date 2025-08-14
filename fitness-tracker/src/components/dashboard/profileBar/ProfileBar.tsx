@@ -7,7 +7,7 @@ import FormModal from "./formModal/FormModal";
 import type { IGoal } from "../../../interfaces/goal.interface";
 import { useState } from "react";
 import type { ISchedule } from "../../../interfaces/schedule.interface";
-import { AccountCircle } from "@mui/icons-material";
+import { AccountCircle, FmdGood } from "@mui/icons-material";
 
 interface Props {
   percent: number;
@@ -38,7 +38,7 @@ const ProfileBar = ({
         <AccountCircle fontSize="large" />
         <div>
           <h3>{user.fullName || "Username"}</h3>
-          <h5>{user.location || "Location"}</h5>
+          <h4 className="color-grey"><FmdGood/> {user.location || "Location"}</h4>
         </div>
         <button onClick={handleLogout} className="profile-logout-button">
           <img src="/logout.png" alt="logout" />

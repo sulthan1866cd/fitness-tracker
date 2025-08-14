@@ -64,13 +64,14 @@ yarn dev
 
 - postgres database is used for storing data
 - schema can be found at `notes/dbSchema.txt`
+- create new database to store tables
 
 ## dotenv
 
 create a .env file in backend folder and add the following parameters
 
-- FRONT_END_URL=url on which frontend is running
-- PORT=port on which backend should listen to
+- FRONT_END_URL='http://localhost:5173/' (url on which frontend is running)
+- PORT=3000(port on which backend should listen to)
 - DB_NAME
 - DB_USERNAME
 - DB_PASSWORD
@@ -78,6 +79,6 @@ create a .env file in backend folder and add the following parameters
 
 create a .env.local in fitness-tracker folder and add the following parameters
 
-- VITE_BACKEND_BASE_URL_V1='http://localhost:3000/api/v1'
+- VITE_BACKEND_BASE_URL_V1='http://localhost:3000/api/v1'(if PORT of backend is 3000)
 
 

@@ -78,3 +78,6 @@
   display: flex;
   justify-content: space-between;
 }
+.diet-macros > span{
+  margin: 0px 20px;
+}
