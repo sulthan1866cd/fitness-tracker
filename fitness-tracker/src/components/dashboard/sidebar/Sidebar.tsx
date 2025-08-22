@@ -9,117 +9,88 @@ import {
   Settings,
   ShowChart,
 } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const path = useLocation().pathname.split("/").pop() as
+    | ""
+    | "graph"
+    | "steps"
+    | "messages"
+    | "directions"
+    | "settings"
+    | "wallet";
   const [selected, setSelected] = useState<
-    | "Home"
-    | "ShowChart"
-    | "DirectionsRun"
-    | "ForumRounded"
-    | "Explore"
-    | "Settings"
-    | "AccountBalance"
-  >("Home");
+    "" | "graph" | "steps" | "messages" | "directions" | "settings" | "wallet"
+  >(path);
   const navigation = useNavigate();
-
+  const handleNavigation = (
+    path:
+      | ""
+      | "graph"
+      | "steps"
+      | "messages"
+      | "directions"
+      | "settings"
+      | "wallet"
+  ) => {
+    setSelected(path);
+    navigation(path);
+  };
   return (
     <div className="sidebar-container">
       <img src="/logo.png" alt="" />
-      <div
-        onClick={() => {
-          setSelected("Home");
-          navigation("");
-        }}
-      >
+      <div onClick={() => handleNavigation("")}>
         <Home
           fontSize="large"
-          className={
-            selected === "Home" ? "sidebar-icon-active" : "sidebar-icons"
-          }
+          className={selected === "" ? "sidebar-icon-active" : "sidebar-icons"}
         />
       </div>
-      <div
-        onClick={() => {
-          setSelected("ShowChart");
-          navigation("graph");
-        }}
-      >
+      <div onClick={() => handleNavigation("graph")}>
         <ShowChart
           fontSize="large"
           className={
-            selected === "ShowChart" ? "sidebar-icon-active" : "sidebar-icons"
+            selected === "graph" ? "sidebar-icon-active" : "sidebar-icons"
           }
         />
       </div>
-      <div
-        onClick={() => {
-          setSelected("DirectionsRun");
-          navigation("steps");
-        }}
-      >
+      <div onClick={() => handleNavigation("steps")}>
         <DirectionsRun
           fontSize="large"
           className={
-            selected === "DirectionsRun"
-              ? "sidebar-icon-active"
-              : "sidebar-icons"
+            selected === "steps" ? "sidebar-icon-active" : "sidebar-icons"
           }
         />
       </div>
-      <div
-        onClick={() => {
-          setSelected("ForumRounded");
-          navigation("messages");
-        }}
-      >
+      <div onClick={() => handleNavigation("messages")}>
         <ForumRounded
           fontSize="large"
           className={
-            selected === "ForumRounded"
-              ? "sidebar-icon-active"
-              : "sidebar-icons"
+            selected === "messages" ? "sidebar-icon-active" : "sidebar-icons"
           }
         />
       </div>
-      <div
-        onClick={() => {
-          setSelected("Explore");
-          navigation("directions");
-        }}
-      >
+      <div onClick={() => handleNavigation("directions")}>
         <Explore
           fontSize="large"
           className={
-            selected === "Explore" ? "sidebar-icon-active" : "sidebar-icons"
+            selected === "directions" ? "sidebar-icon-active" : "sidebar-icons"
           }
         />
       </div>
-      <div
-        onClick={() => {
-          setSelected("Settings");
-          navigation("settings");
-        }}
-      >
+      <div onClick={() => handleNavigation("settings")}>
         <Settings
           fontSize="large"
           className={
-            selected === "Settings" ? "sidebar-icon-active" : "sidebar-icons"
+            selected === "settings" ? "sidebar-icon-active" : "sidebar-icons"
           }
         />
       </div>
-      <div
-        onClick={() => {
-          setSelected("AccountBalance");
-          navigation("wallet");
-        }}
-      >
+      <div onClick={() => handleNavigation("wallet")}>
         <AccountBalanceWallet
           fontSize="large"
           className={
-            selected === "AccountBalance"
-              ? "sidebar-icon-active"
-              : "sidebar-icons"
+            selected === "wallet" ? "sidebar-icon-active" : "sidebar-icons"
           }
         />
       </div>

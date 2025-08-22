@@ -59,8 +59,8 @@ function App() {
         <Route
           path="/*"
           element={
-            <h1 className="dashboard-container">
-              not found login:<Link to={"/"}></Link>
+            <h1 >
+              not found <Link to={"/"}>login</Link>
             </h1>
           }
         />
