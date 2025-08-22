@@ -37,7 +37,7 @@ const Login = () => {
     }
     if (result.status === 200) {
       localStorage.setItem("username", username);
-      navigation(`/user/${username}`);
+      navigation(`/dashboard/${username}/home`);
     }
   };
 

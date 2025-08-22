@@ -17,7 +17,7 @@ const WeeklyProgress = ({ dailyProgresses, setDailyProgressIndex }: Props) => {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     datasets: [
       {
-        data: dailyProgresses.map((progress) => progress.percent),
+        data: dailyProgresses.map((progress) => progress.percent || 0),
         backgroundColor: "rgba(227, 255, 66,0.6)",
         hoverBackgroundColor: "rgba(217, 255, 0, 1)",
         borderRadius: 10,
@@ -34,10 +34,10 @@ const WeeklyProgress = ({ dailyProgresses, setDailyProgressIndex }: Props) => {
     Strength: 0,
   };
   for (const progress of dailyProgresses) {
-    doughnutValues.Cardio += progress.cardio;
-    doughnutValues.Strength += progress.strength;
-    doughnutValues.Stretching += progress.stretching;
-    doughnutValues.Treadmill += progress.treadmill;
+    doughnutValues.Cardio += progress.cardio || 0;
+    doughnutValues.Strength += progress.strength || 0;
+    doughnutValues.Stretching += progress.stretching || 0;
+    doughnutValues.Treadmill += progress.treadmill || 0;
   }
   const doughnutCardData: ChartData<"doughnut", number[], string> = {
     labels: doughnutLabels,

@@ -13,7 +13,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const path = useLocation().pathname.split("/").pop() as
-    | ""
+    | "home"
     | "graph"
     | "steps"
     | "messages"
@@ -21,12 +21,12 @@ const Sidebar = () => {
     | "settings"
     | "wallet";
   const [selected, setSelected] = useState<
-    "" | "graph" | "steps" | "messages" | "directions" | "settings" | "wallet"
+    "home" | "graph" | "steps" | "messages" | "directions" | "settings" | "wallet"
   >(path);
   const navigation = useNavigate();
   const handleNavigation = (
     path:
-      | ""
+      | "home"
       | "graph"
       | "steps"
       | "messages"
@@ -39,11 +39,11 @@ const Sidebar = () => {
   };
   return (
     <div className="sidebar-container">
-      <img src="/logo.png" alt="" />
-      <div onClick={() => handleNavigation("")}>
+      <img src="/logo.png" alt="logo" />
+      <div onClick={() => handleNavigation("home")}>
         <Home
           fontSize="large"
-          className={selected === "" ? "sidebar-icon-active" : "sidebar-icons"}
+          className={selected === "home" ? "sidebar-icon-active" : "sidebar-icons"}
         />
       </div>
       <div onClick={() => handleNavigation("graph")}>

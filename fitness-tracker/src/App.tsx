@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./components/forms/Login";
 import Regester from "./components/forms/Regester";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -10,8 +10,9 @@ function App() {
       <Routes>
         <Route index element={<Login />} />
         <Route path="/regester" element={<Regester />} />
-        <Route path="/user/:username" element={<Dashboard />}>
-          <Route index element={<HomePage />} />
+        <Route path="dashboard/:username" element={<Dashboard />}>
+          <Route index element={<Navigate to="home" />} />
+          <Route path="home" element={<HomePage />} />
           <Route
             path="graph"
             element={
@@ -59,7 +60,7 @@ function App() {
         <Route
           path="/*"
           element={
-            <h1 >
+            <h1>
               not found <Link to={"/"}>login</Link>
             </h1>
           }

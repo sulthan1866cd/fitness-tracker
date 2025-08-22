@@ -105,7 +105,7 @@ const Regester = () => {
       }
 
       localStorage.setItem("username", username);
-      navigation(`/user/${username}`);
+      navigation(`/dashboard/${username}/home`);
     }
   };
 

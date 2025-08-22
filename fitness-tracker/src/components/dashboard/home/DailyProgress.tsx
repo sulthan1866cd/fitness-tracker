@@ -28,29 +28,36 @@ const DailyProgress = ({
           <DirectionsRun fontSize="large" />
           <h2 className="display-inline">Steps</h2>
         </div>
-        <h4>
-          {`${dailyProgresses[dailyProgressIndex]?.steps} / ${goal.steps} steps`}{" "}
-        </h4>
-        <div className="activity-card-slider">
-          <div />
-        </div>
-        <p>
-          {`${Math.floor(
-            (dailyProgresses[dailyProgressIndex]?.steps / (goal.steps || 1)) *
-              100
-          )}
+        {goal.steps && dailyProgresses[dailyProgressIndex]?.steps ? (
+          <>
+            <h4>
+              {`${dailyProgresses[dailyProgressIndex]?.steps} / ${goal.steps} steps`}
+            </h4>
+            <div className="activity-card-slider">
+              <div />
+            </div>
+            <p>
+              {`${Math.floor(
+                (dailyProgresses[dailyProgressIndex]?.steps / goal.steps) * 100
+              )}
             % of your goals`}
-        </p>
+            </p>
+          </>
+        ) : <p>set goals steps to see progress</p>}
       </ActivityCard>
       <ActivityCard size={25} color="blue">
         <div>
           <WaterDrop fontSize="large" />
           <h2 className="display-inline">Water</h2>
         </div>
-        <h4>{`${dailyProgresses[dailyProgressIndex]?.water} Liters`}</h4>
-        <div className="activity-card-slider">
-          <div />
-        </div>
+        {goal.water && dailyProgresses[dailyProgressIndex]?.water ? (
+          <>
+            <h4>{`${dailyProgresses[dailyProgressIndex]?.water} / ${goal.water} Liters`}</h4>
+            <div className="activity-card-slider">
+              <div />
+            </div>
+          </>
+        ) : <p>set goals water to see progress</p>}
       </ActivityCard>
       <ActivityCard size={25} color="yellow">
         <div>
