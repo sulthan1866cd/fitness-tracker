@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./Sidebar.css";
 import {
   AccountBalanceWallet,
@@ -8,43 +9,42 @@ import {
   Settings,
   ShowChart,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
-interface Props {
-  selected:
+const Sidebar = () => {
+  const [selected, setSelected] = useState<
     | "Home"
     | "ShowChart"
     | "DirectionsRun"
     | "ForumRounded"
     | "Explore"
     | "Settings"
-    | "AccountBalance";
-  setSelected: React.Dispatch<
-    React.SetStateAction<
-      | "Home"
-      | "ShowChart"
-      | "DirectionsRun"
-      | "ForumRounded"
-      | "Explore"
-      | "Settings"
-      | "AccountBalance"
-    >
-  >;
-}
-const Sidebar = ({selected,setSelected}:Props) => {
+    | "AccountBalance"
+  >("Home");
+  const navigation = useNavigate();
 
   return (
     <div className="sidebar-container">
       <img src="/logo.png" alt="" />
-      <div onClick={() => setSelected("Home")}>
+      <div
+        onClick={() => {
+          setSelected("Home");
+          navigation("");
+        }}
+      >
         <Home
           fontSize="large"
           className={
             selected === "Home" ? "sidebar-icon-active" : "sidebar-icons"
           }
-          children={<button onClick={() => setSelected("Home")}></button>}
         />
       </div>
-      <div onClick={() => setSelected("ShowChart")}>
+      <div
+        onClick={() => {
+          setSelected("ShowChart");
+          navigation("graph");
+        }}
+      >
         <ShowChart
           fontSize="large"
           className={
@@ -52,7 +52,12 @@ const Sidebar = ({selected,setSelected}:Props) => {
           }
         />
       </div>
-      <div onClick={() => setSelected("DirectionsRun")}>
+      <div
+        onClick={() => {
+          setSelected("DirectionsRun");
+          navigation("steps");
+        }}
+      >
         <DirectionsRun
           fontSize="large"
           className={
@@ -62,7 +67,12 @@ const Sidebar = ({selected,setSelected}:Props) => {
           }
         />
       </div>
-      <div onClick={() => setSelected("ForumRounded")}>
+      <div
+        onClick={() => {
+          setSelected("ForumRounded");
+          navigation("messages");
+        }}
+      >
         <ForumRounded
           fontSize="large"
           className={
@@ -72,7 +82,12 @@ const Sidebar = ({selected,setSelected}:Props) => {
           }
         />
       </div>
-      <div onClick={() => setSelected("Explore")}>
+      <div
+        onClick={() => {
+          setSelected("Explore");
+          navigation("directions");
+        }}
+      >
         <Explore
           fontSize="large"
           className={
@@ -80,7 +95,12 @@ const Sidebar = ({selected,setSelected}:Props) => {
           }
         />
       </div>
-      <div onClick={() => setSelected("Settings")}>
+      <div
+        onClick={() => {
+          setSelected("Settings");
+          navigation("settings");
+        }}
+      >
         <Settings
           fontSize="large"
           className={
@@ -88,7 +108,12 @@ const Sidebar = ({selected,setSelected}:Props) => {
           }
         />
       </div>
-      <div onClick={() => setSelected("AccountBalance")}>
+      <div
+        onClick={() => {
+          setSelected("AccountBalance");
+          navigation("wallet");
+        }}
+      >
         <AccountBalanceWallet
           fontSize="large"
           className={

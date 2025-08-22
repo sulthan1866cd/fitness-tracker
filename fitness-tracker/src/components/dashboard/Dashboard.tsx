@@ -1,27 +1,16 @@
 import { useEffect, useState } from "react";
 import { type IUser } from "../../interfaces/user.interface";
-import { useNavigate, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { type IGoal } from "../../interfaces/goal.interface";
 import ProfileBar from "./profileBar/ProfileBar";
 import Sidebar from "./sidebar/Sidebar";
 import "./Dashboard.css";
 import { type ISchedule } from "../../interfaces/schedule.interface";
 import { fetchData } from "../../utils/fetchData";
-import HomePage from "./home/HomePage";
-import { type IDailyProgress } from "../../interfaces/dailyProgress.interface";
 import Loading from "../loading/Loading";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [selected, setSelected] = useState<
-    | "Home"
-    | "ShowChart"
-    | "DirectionsRun"
-    | "ForumRounded"
-    | "Explore"
-    | "Settings"
-    | "AccountBalance"
-  >("Home");
 
   const [userDetails, setUserDetails] = useState<IUser>({
     username: "Username",
@@ -35,7 +24,6 @@ const Dashboard = () => {
     userUsername: username || "Username",
   });
   const [schedules, setSchedules] = useState<ISchedule[]>([]);
-  const [dailyProgresses, setDailyProgresses] = useState<IDailyProgress[]>([]);
 
   const countDefined = (data: IGoal | IUser) => {
     let notNull = 0;
@@ -52,14 +40,13 @@ const Dashboard = () => {
     }
   }, []);
   useEffect(() => {
-    const fetchAllData = async() => {
-     const hasFetched = await fetchData(username, "users", setUserDetails);
+    const fetchAllData = async () => {
+      const hasFetched = await fetchData(username, "users", setUserDetails);
       fetchData(username, "goals", setGoal);
       fetchData(username, "schedules", setSchedules);
-      fetchData(username, "daily-progress", setDailyProgresses);
-      setLoading(!hasFetched)
+      setLoading(!hasFetched);
     };
-    fetchAllData()
+    fetchAllData();
   }, []);
 
   useEffect(() => {
@@ -72,15 +59,8 @@ const Dashboard = () => {
 
   return (
     <div className="display-flex">
-      <Sidebar selected={selected} setSelected={setSelected} />
-      {selected === "Home" ? (
-        <HomePage goal={goal} dailyProgresses={dailyProgresses} />
-      ) : (
-        <div className="dashboard-container">
-          <h1>{selected} page build in progress</h1>
-        </div>
-      )}
-
+      <Sidebar />
+      <Outlet context={goal} />
       <ProfileBar
         user={userDetails}
         setUser={setUserDetails}

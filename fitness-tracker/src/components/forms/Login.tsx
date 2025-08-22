@@ -70,7 +70,7 @@ const Login = () => {
         <p>
           Don't have an account?
           <Link to={"/regester"} className="link">
-            Regester
+            Register
           </Link>
         </p>
       </section>

@@ -15,7 +15,7 @@ const Input = ({ value, setValue, type, placeholder, required }: Props) => {
   return (
     <div className="input-container">
       <input
-        id={placeholder}
+        id={`${placeholder}-input`}
         className="input"
         type={type}
         value={value}
