@@ -1,7 +1,7 @@
-import BorderCard from "./borderCard/BorderCard";
 import { dummyDietPlans, dummyTrainers } from "../../../utils/dummyDatas";
 import { Star, WorkspacePremium } from "@mui/icons-material";
 import { greeting, timeHrs } from "./helper";
+import ActivityCard from "./activityCard/ActivityCard";
 
 const TrainersPlan = () => {
   const dietPlanIndex =
@@ -11,7 +11,7 @@ const TrainersPlan = () => {
       <h2>Recomended Trainer for you</h2>
       <div className="display-flex">
         {dummyTrainers.map((trainer) => (
-          <BorderCard size={25} key={trainer.id}>
+          <ActivityCard color="white" border size={25} key={trainer.id}>
             <img
               className="trainer-bg-img"
               src={trainer.bgImg}
@@ -35,9 +35,9 @@ const TrainersPlan = () => {
               </span>
               <span className="color-grey">View Profile</span>
             </div>
-          </BorderCard>
+          </ActivityCard>
         ))}
-        <BorderCard size={50}>
+        <ActivityCard color="white" size={50} border>
           <h3 className="diet-header">
             <span>{dummyDietPlans[dietPlanIndex].time}</span>
             <span className="color-black">{`${timeHrs % 12}:00 ${
@@ -66,7 +66,7 @@ const TrainersPlan = () => {
               </div>
             </div>
           ))}
-        </BorderCard>
+        </ActivityCard>
       </div>
     </div>
   );

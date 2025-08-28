@@ -1,26 +1,27 @@
-.activity-card-slider {
+.activity-card-steps-range {
   border-radius: 50px;
-  height: 10px;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.4);
+  height: 10px !important;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  
 }
-.activity-card-slider > div {
-  border-radius: 50px;
-  height: 10px;
-  width: 50%;
-  background-color: white;
+
+.activity-card-water-range {
+  position: absolute;
+  top: 50px;
+  right: 50px;
 }
+
 .calories-icon,
 .heart-rate-icon {
   font-size: 80px !important;
   margin-bottom: -15px;
   margin-left: 50px;
 }
-.weekly-activity-header{
+.weekly-activity-header {
   display: flex;
   justify-content: space-between;
 }
-.weekly-activity-header > select{
+.weekly-activity-header > select {
   height: 40px;
   width: 90px;
   border-radius: 10px;
@@ -36,7 +37,7 @@
 .doughnut-selected-value {
   position: absolute;
   top: 150px;
-  left: 120px;
+  left: 110px;
   background-color: white;
   border-radius: 50%;
   padding: 80px 60px;
@@ -78,6 +79,6 @@
   display: flex;
   justify-content: space-between;
 }
-.diet-macros > span{
+.diet-macros > span {
   margin: 0px 20px;
 }

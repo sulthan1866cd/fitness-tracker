@@ -4,6 +4,10 @@
   border-radius: 8px;
   color: white;
   position: relative;
+  height: fit-content inherit;
+}
+.activity-card-white {
+  background-color: rgb(255, 255, 255);
 }
 .activity-card-green {
   background-color: rgb(74, 190, 29);
@@ -22,9 +26,11 @@
 }
 .activity-card-25 {
   width: 25%;
-  height: 150px;
 }
 .activity-card-50 {
   width: 50%;
-  height: 400px;
+}
+
+.activity-card-border {
+  border: 1px solid gray;
 }

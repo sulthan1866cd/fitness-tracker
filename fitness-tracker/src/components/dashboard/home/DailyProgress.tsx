@@ -9,6 +9,7 @@ import {
 } from "@mui/icons-material";
 import type { IDailyProgress } from "../../../interfaces/dailyProgress.interface";
 import type { IGoal } from "../../../interfaces/goal.interface";
+import { CircularProgress, LinearProgress } from "@mui/material";
 interface Props {
   dailyProgresses: IDailyProgress[];
   goal: IGoal;
@@ -20,6 +21,12 @@ const DailyProgress = ({
   dailyProgressIndex,
 }: Props) => {
   const barLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const stepsPercent = Math.floor(
+    (dailyProgresses[dailyProgressIndex]?.steps / (goal.steps || 1)) * 100
+  );
+  const waterPercent = Math.floor(
+    (dailyProgresses[dailyProgressIndex]?.water / (goal.water || 1)) * 100
+  );
 
   return (
     <div className="display-flex">
@@ -33,17 +40,16 @@ const DailyProgress = ({
             <h4>
               {`${dailyProgresses[dailyProgressIndex]?.steps} / ${goal.steps} steps`}
             </h4>
-            <div className="activity-card-slider">
-              <div />
-            </div>
-            <p>
-              {`${Math.floor(
-                (dailyProgresses[dailyProgressIndex]?.steps / goal.steps) * 100
-              )}
-            % of your goals`}
-            </p>
+            <LinearProgress
+              variant="determinate"
+              value={stepsPercent}
+              className="activity-card-steps-range"
+            />
+            <p>{`${stepsPercent} % of your goals`}</p>
           </>
-        ) : <p>set goals steps to see progress</p>}
+        ) : (
+          <p>set goals steps to see progress</p>
+        )}
       </ActivityCard>
       <ActivityCard size={25} color="blue">
         <div>
@@ -53,11 +59,18 @@ const DailyProgress = ({
         {goal.water && dailyProgresses[dailyProgressIndex]?.water ? (
           <>
             <h4>{`${dailyProgresses[dailyProgressIndex]?.water} / ${goal.water} Liters`}</h4>
-            <div className="activity-card-slider">
-              <div />
-            </div>
+            <CircularProgress
+              variant="determinate"
+              value={waterPercent}
+              className="activity-card-water-range"
+              color="inherit"
+              size={100}
+            />
+            <p>{`${waterPercent} % of your goals`}</p>
           </>
-        ) : <p>set goals water to see progress</p>}
+        ) : (
+          <p>set goals water to see progress</p>
+        )}
       </ActivityCard>
       <ActivityCard size={25} color="yellow">
         <div>

@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Input from "../../../utilComponents/Input";
 import Button from "../../../utilComponents/Button";
 import type { IUser } from "../../../../interfaces/user.interface";
@@ -19,29 +19,20 @@ const ProfileForm = ({
 }: Props) => {
   const [name, setName] = useState<string>(user.fullName || "");
   const [location, setLocation] = useState<string>(user.location || "");
-  const [dateOfBirth, setDateOfBirth] = useState<Date>(user.dateOfBirth||new Date());
-  const [height, setHeight] = useState<number>(user.height ||0);
+  const [dateOfBirth, setDateOfBirth] = useState<Date>(
+    user.dateOfBirth || new Date()
+  );
+  const [height, setHeight] = useState<number>(user.height || 0);
   const [weight, setWeight] = useState<number>(user.weight || 0);
+  const [hasChanges, setHasChanges] = useState<boolean>(false);
 
   const handleSave = async () => {
     let age = new Date().getFullYear() - new Date(dateOfBirth).getFullYear();
 
     if (
       !(
-        validateNumbers(
-          setError,
-          "height",
-          height,
-          50,
-          250,
-        ) &&
-        validateNumbers(
-          setError,
-          "weight",
-          weight,
-          30,
-          250,
-        ) &&
+        validateNumbers(setError, "height", height, 50, 250) &&
+        validateNumbers(setError, "weight", weight, 30, 250) &&
         validateNumbers(setError, "age", age, 10, 120)
       )
     )
@@ -84,36 +75,41 @@ const ProfileForm = ({
         setValue={setName}
         type="text"
         placeholder="Full Name"
+        onChange={() => setHasChanges(true)}
       />
       <Input
         value={location}
         setValue={setLocation}
         type="text"
         placeholder="Your Location"
+        onChange={() => setHasChanges(true)}
       />
       <Input
         value={dateOfBirth}
         setValue={setDateOfBirth}
         type="date"
         placeholder="Date of Birth"
+        onChange={() => setHasChanges(true)}
       />
       <Input
         value={height}
         setValue={setHeight}
         type="text"
         placeholder="Your height in cm"
+        onChange={() => setHasChanges(true)}
       />
       <Input
         value={weight}
         setValue={setWeight}
         type="text"
         placeholder="Your weight in kg"
+        onChange={() => setHasChanges(true)}
       />
       <div className="profile-form-buttons">
         <Button onClick={() => setOpen(false)} color="white">
           cancel
         </Button>
-        <Button onClick={handleSave} color="yellow">
+        <Button onClick={handleSave} color="yellow" disabled={!hasChanges}>
           Save
         </Button>
       </div>

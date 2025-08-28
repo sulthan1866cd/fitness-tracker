@@ -11,39 +11,36 @@ import {
 } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 
+type Path =
+  | "home"
+  | "graph"
+  | "steps"
+  | "messages"
+  | "directions"
+  | "settings"
+  | "wallet";
+
 const Sidebar = () => {
-  const path = useLocation().pathname.split("/").pop() as
-    | "home"
-    | "graph"
-    | "steps"
-    | "messages"
-    | "directions"
-    | "settings"
-    | "wallet";
-  const [selected, setSelected] = useState<
-    "home" | "graph" | "steps" | "messages" | "directions" | "settings" | "wallet"
-  >(path);
+  const path = useLocation().pathname.split("/").pop() as Path;
+  const [selected, setSelected] = useState<Path>(path);
   const navigation = useNavigate();
-  const handleNavigation = (
-    path:
-      | "home"
-      | "graph"
-      | "steps"
-      | "messages"
-      | "directions"
-      | "settings"
-      | "wallet"
-  ) => {
+  const handleNavigation = (path: Path) => {
     setSelected(path);
     navigation(path);
   };
   return (
     <div className="sidebar-container">
-      <img src="/logo.png" alt="logo" />
+      <img
+        src="/logo.png"
+        alt="logo"
+        onClick={() => handleNavigation("home")}
+      />
       <div onClick={() => handleNavigation("home")}>
         <Home
           fontSize="large"
-          className={selected === "home" ? "sidebar-icon-active" : "sidebar-icons"}
+          className={
+            selected === "home" ? "sidebar-icon-active" : "sidebar-icons"
+          }
         />
       </div>
       <div onClick={() => handleNavigation("graph")}>

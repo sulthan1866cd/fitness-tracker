@@ -18,6 +18,7 @@ const GoalForm = ({ goal, setGoal, setOpen, setError, setMessage }: Props) => {
   const [steps, setSteps] = useState<number>(goal.steps || 0);
   const [water, setWater] = useState<number>(goal.water || 0);
   const [weight, setWeight] = useState<number>(goal.weight || 0);
+  const [hasChanges, setHasChanges] = useState<boolean>(false);
 
   const handleSave = async () => {
     if (
@@ -64,38 +65,43 @@ const GoalForm = ({ goal, setGoal, setOpen, setError, setMessage }: Props) => {
       <Input
         value={steps}
         setValue={setSteps}
-        type="text"
+        type="number"
         placeholder="Steps per day"
+        onChange={() => setHasChanges(true)}
       />
       <Input
         value={running}
         setValue={setRunning}
-        type="text"
+        type="number"
         placeholder="Running per day in km"
+        onChange={() => setHasChanges(true)}
       />
       <Input
         value={sleep}
         setValue={setSleep}
-        type="text"
+        type="number"
         placeholder="Sleep per day in hrs"
+        onChange={() => setHasChanges(true)}
       />
       <Input
         value={weight}
         setValue={setWeight}
-        type="text"
+        type="number"
         placeholder="Target weight in kg"
+        onChange={() => setHasChanges(true)}
       />
       <Input
         value={water}
         setValue={setWater}
-        type="text"
+        type="number"
         placeholder="Water Ltr per day"
+        onChange={() => setHasChanges(true)}
       />
       <div className="profile-form-buttons">
         <Button onClick={() => setOpen(false)} color="white">
           cancel
         </Button>
-        <Button onClick={handleSave} color="yellow">
+        <Button onClick={handleSave} color="yellow" disabled={!hasChanges}>
           Save
         </Button>
       </div>

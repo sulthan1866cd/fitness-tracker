@@ -7,8 +7,16 @@ interface Props {
   type: string;
   placeholder: string;
   required?: boolean;
+  onChange?: () => void;
 }
-const Input = ({ value, setValue, type, placeholder, required }: Props) => {
+const Input = ({
+  value,
+  setValue,
+  type,
+  placeholder,
+  required,
+  onChange,
+}: Props) => {
   const handleInputChange = (input: string) => {
     setValue(input);
   };
@@ -19,7 +27,10 @@ const Input = ({ value, setValue, type, placeholder, required }: Props) => {
         className="input"
         type={type}
         value={value}
-        onChange={(event) => handleInputChange(event.target.value)}
+        onChange={(event) => {
+          handleInputChange(event.target.value);
+          onChange?.();
+        }}
         required={required}
       />
       <label

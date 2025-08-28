@@ -15,8 +15,16 @@ const HomePage = () => {
   const [dailyProgressIndex, setDailyProgressIndex] = useState<number>(6);
 
   useEffect(() => {
-    fetchData(goal.userUsername, "daily-progress", setDailyProgresses);
+      fetchData(goal.userUsername, "daily-progress", setDailyProgresses);
   }, []);
+
+  useEffect(() => {
+    dailyProgresses.forEach((progress) => {
+      const stepsPercent = (progress.steps / (goal.steps || 1)) * 100;
+      const waterPercent = (progress.water / (goal.water || 1)) * 100;
+      progress.percent = Math.floor((stepsPercent + waterPercent) / 2);
+    });
+  }, [dailyProgresses]);
 
   return (
     <div className="dashboard-container">
